@@ -12,13 +12,16 @@
  */
 package project4;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /* see the PDF for descriptions of the methods and fields in this class
  * you may add fields, methods or inner classes to Critter ONLY if you make your additions private
  * no new public, protected or default-package code or data can be added to Critter
  */
 public abstract class Critter {
+	public static Set<Critter> critterCollection = new HashSet<Critter>();
 	
 	private static java.util.Random rand = new java.util.Random();
 	public static int getRandomInt(int max) {
@@ -40,6 +43,7 @@ public abstract class Critter {
 	private int y_coord;
 	
 	protected final void walk(int direction) {
+		
 	}
 	
 	protected final void run(int direction) {
@@ -57,6 +61,15 @@ public abstract class Critter {
 	 * an InvalidCritterException must be thrown
 	 */
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
+		Critter temp;
+		switch(critter_class_name){
+		case "Craig" :
+			temp = new Craig();
+			critterCollection.add(temp);
+			break;
+		default :
+			throw new InvalidCritterException(critter_class_name);		
+		}
 	}
 	
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
@@ -113,7 +126,34 @@ public abstract class Critter {
 	private static List<Critter> babies = new java.util.ArrayList<Critter>();
 		
 	public static void worldTimeStep() {
+		for(Critter c : critterCollection){
+			c.doTimeStep();
+		}
+		
 	}
 	
-	public static void displayWorld() {}
+	public static void displayWorld() {
+		System.out.print("+");
+		for(int i=0; i<Params.world_width; i+=1){
+			System.out.print("-");
+		}
+		System.out.println("+");
+		
+		for(int i = 0; i < Params.world_height; i+=1){
+			System.out.print("|");
+			for(int k = 0; k<Params.world_width; k+=1){
+				for(Critter c:critterCollection){
+					if()
+				}
+			}
+			System.out.println("|");
+		}
+		
+		System.out.print("+");
+		for(int i=0; i<Params.world_width; i+=1){
+			System.out.print("-");
+		}
+		System.out.println("+");
+		
+	}
 }
