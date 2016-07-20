@@ -21,7 +21,6 @@ import java.util.Set;
  * no new public, protected or default-package code or data can be added to Critter
  */
 public abstract class Critter {
-	public static Set<Critter> critterCollection = new HashSet<Critter>();
 	
 	private static java.util.Random rand = new java.util.Random();
 	public static int getRandomInt(int max) {
@@ -37,17 +36,53 @@ public abstract class Critter {
 	public String toString() { return ""; }
 	
 	private int energy = 0;
+	private boolean hasMoved;
 	protected int getEnergy() { return energy; }
 	
 	private int x_coord;
 	private int y_coord;
 	
 	protected final void walk(int direction) {
-		
+		// decrease energy
+		energy -= Params.walk_energy_cost;
+		if (!hasMoved) {
+			move(direction, 1);
+		}
+		// ==========FUTURE STUFF ==========
+		// Move bug
+		// In case of fight, do special stuff
 	}
 	
 	protected final void run(int direction) {
+		energy -= Params.run_energy_cost;
+		if (!hasMoved) {
+			move(direction, 2);
+		}
+	}
+	// Moves the critter in the specified direction by the specified distance
+	private final void move(int direction, int distance) {
+		// Move critter
+		if (direction == 7 || direction == 0 || direction == 1)
+			x_coord += distance;
+		if (direction == 3 || direction == 4 || direction == 5)
+			x_coord -= distance;
+		if (direction == 5 || direction == 6 || direction == 7)
+			y_coord += distance;
+		if (direction == 1 || direction == 2 || direction == 3)
+			y_coord -= distance;
 		
+		// Wrap-around correction
+		if (x_coord < 0)
+			x_coord += Params.world_width;
+		if (x_coord >= Params.world_width)
+			x_coord = Params.world_width % x_coord;
+		if (y_coord < 0)
+			y_coord += Params.world_height;
+		if (y_coord >= Params.world_height)
+			y_coord = Params.world_height % y_coord;
+		
+		// Raise flag
+		hasMoved = true;
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
@@ -65,11 +100,14 @@ public abstract class Critter {
 		switch(critter_class_name){
 		case "Craig" :
 			temp = new Craig();
-			critterCollection.add(temp);
 			break;
 		default :
 			throw new InvalidCritterException(critter_class_name);		
 		}
+		population.add(temp);
+		temp.x_coord = getRandomInt(Params.world_width);
+		temp.y_coord = getRandomInt(Params.world_height);
+
 	}
 	
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
@@ -126,10 +164,14 @@ public abstract class Critter {
 	private static List<Critter> babies = new java.util.ArrayList<Critter>();
 		
 	public static void worldTimeStep() {
-		for(Critter c : critterCollection){
+		for(Critter c : population){
 			c.doTimeStep();
 		}
 		
+		// Reset move flags
+		for (Critter c: population) {
+			c.hasMoved = false;
+		}
 	}
 	
 	public static void displayWorld() {
@@ -142,9 +184,18 @@ public abstract class Critter {
 		for(int i = 0; i < Params.world_height; i+=1){
 			System.out.print("|");
 			for(int k = 0; k<Params.world_width; k+=1){
-				for(Critter c:critterCollection){
-					if()
+				// ==========================
+				boolean critterPrinted = false;
+				for(Critter c : population){
+					if(c.x_coord == i && c.y_coord == k) {
+						System.out.print("C");
+						critterPrinted = true;
+						break;
+					}
 				}
+				if (!critterPrinted)
+					System.out.print(" ");
+				// ===========================
 			}
 			System.out.println("|");
 		}
