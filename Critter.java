@@ -87,6 +87,10 @@ public abstract class Critter {
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
+		offspring.energy = this.energy / 2;						// Round energy down for the baby
+		this.energy = (this.energy / 2) + (this.energy % 2);	// Round energy up for the mama
+		offspring.move(direction, 1);							// Spawn babies next to mamas
+		babies.add(offspring);									// Add the baby!
 	}
 
 	public abstract void doTimeStep();
@@ -102,13 +106,16 @@ public abstract class Critter {
 		case "Craig" :
 			temp = new Craig();
 			break;
+		case "Algae" :
+			temp = new Algae();
+			break;
 		default :
 			throw new InvalidCritterException(critter_class_name);		
 		}
-		population.add(temp);
-		temp.x_coord = getRandomInt(Params.world_width);
+		temp.x_coord = getRandomInt(Params.world_width);	// Set starting coordinates
 		temp.y_coord = getRandomInt(Params.world_height);
-		temp.energy = Params.start_energy;
+		temp.energy = Params.start_energy;					// Set starting energy
+		population.add(temp);								// Add the critter
 
 	}
 	
@@ -185,7 +192,15 @@ public abstract class Critter {
 			c.energy -= Params.rest_energy_cost;
 		
 //		   4. Add algae
-//		   5. Remove dead critter
+		if (population.size() < 5) {	// @@@@@@ THIS NEEDS TO BE FIXED BY IMPLEMENTING getInstances() @@@@@@@
+			try {
+				makeCritter("Algae");
+			} catch (InvalidCritterException e) {
+				e.printStackTrace();
+			}
+		}
+		
+//		   5. Remove dead critters
 		List<Critter> dead = new ArrayList<Critter>();
 		for(Critter c : population)
 			if (c.energy <= 0)
@@ -193,10 +208,12 @@ public abstract class Critter {
 		population.removeAll(dead);		// Remove the dead
 		
 //		   6. add babies to population
-		// Reset move flags
-		for (Critter c: population) {
+		population.addAll(babies);		// Dump-truck crib into the real world
+		babies.clear();					// Prevent immortal babies
+		
+//		   7. Reset move flags
+		for (Critter c: population)
 			c.hasMoved = false;
-		}
 	}
 	
 	public static void displayWorld() {
