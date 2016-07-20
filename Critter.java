@@ -12,6 +12,7 @@
  */
 package project4;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -107,6 +108,7 @@ public abstract class Critter {
 		population.add(temp);
 		temp.x_coord = getRandomInt(Params.world_width);
 		temp.y_coord = getRandomInt(Params.world_height);
+		temp.energy = Params.start_energy;
 
 	}
 	
@@ -164,10 +166,33 @@ public abstract class Critter {
 	private static List<Critter> babies = new java.util.ArrayList<Critter>();
 		
 	public static void worldTimeStep() {
-		for(Critter c : population){
-			c.doTimeStep();
-		}
+//		   0. timestep++;
 		
+//		   1. Loop through all of the critters in the collection, and call doTimeStep for each
+//	       		1. walk/run
+//	       		2. energy deduction
+//	       		3. reproduce , but babies are still in crib.
+//	       		4. cheat
+		for(Critter c : population)
+			c.doTimeStep();
+
+//		   2. doEncounters(); Until there are no encounters left - no order specified
+//		       1. fight, square by square
+//		       2. //if you’ve already walked and try to walk, you don’t but you lose energy. Use a flag…. When would this happen? In the walk function
+
+//		   3. Update rest energy - Do critters have to move every step? and if not - do they only rest when they don’t move. Yes, always - it’s the cost of living
+		for(Critter c : population)
+			c.energy -= Params.rest_energy_cost;
+		
+//		   4. Add algae
+//		   5. Remove dead critter
+		List<Critter> dead = new ArrayList<Critter>();
+		for(Critter c : population)
+			if (c.energy <= 0)
+				dead.add(c);			// "Bring out your dead!"
+		population.removeAll(dead);		// Remove the dead
+		
+//		   6. add babies to population
 		// Reset move flags
 		for (Critter c: population) {
 			c.hasMoved = false;
@@ -188,7 +213,7 @@ public abstract class Critter {
 				boolean critterPrinted = false;
 				for(Critter c : population){
 					if(c.x_coord == i && c.y_coord == k) {
-						System.out.print("C");
+						System.out.print(c.energy);
 						critterPrinted = true;
 						break;
 					}
