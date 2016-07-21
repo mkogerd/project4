@@ -175,24 +175,19 @@ public abstract class Critter {
 	public static void worldTimeStep() {
 //		   0. timestep++;
 		
-//		   1. Loop through all of the critters in the collection, and call doTimeStep for each
-//	       		1. walk/run
-//	       		2. energy deduction
-//	       		3. reproduce , but babies are still in crib.
-//	       		4. cheat
-		for(Critter c : population)
+		// 1. Loop through all of the critters in the collection, and call doTimeStep for each
+		for (Critter c : population)
 			c.doTimeStep();
 
-//		   2. doEncounters(); Until there are no encounters left - no order specified
-//		       1. fight, square by square
-//		       2. //if you’ve already walked and try to walk, you don’t but you lose energy. Use a flag…. When would this happen? In the walk function
+		// 2. doEncounters();
+		doEncounters();
 
 //		   3. Update rest energy - Do critters have to move every step? and if not - do they only rest when they don’t move. Yes, always - it’s the cost of living
 		for(Critter c : population)
 			c.energy -= Params.rest_energy_cost;
 		
 //		   4. Add algae
-		if (population.size() < 5) {	// @@@@@@ THIS NEEDS TO BE FIXED BY IMPLEMENTING getInstances() @@@@@@@
+		for (int i = 0; i <Params.refresh_algae_count; i+=1) {
 			try {
 				makeCritter("Algae");
 			} catch (InvalidCritterException e) {
@@ -216,6 +211,32 @@ public abstract class Critter {
 			c.hasMoved = false;
 	}
 	
+	public static void doEncounters() {
+		for (Critter a: population)
+			for (Critter b: population) {
+				if (a.equals(b)) continue;		// Stop hitting yourself
+				if (a.x_coord == b.x_coord && a.y_coord == b.y_coord && a.energy > 0 && b.energy > 0) {
+					// Get die rolls
+					int aRoll = 0;
+					int bRoll = 0;
+					// Check willingness to fight
+					if (a.fight(b.toString()))
+						aRoll = getRandomInt(a.energy);
+					if (b.fight(a.toString())) 
+						bRoll = getRandomInt(b.energy);
+					// Find the winner
+					if (aRoll >= bRoll) {
+						a.energy += b.energy/2;
+						b.energy = 0;
+					} 
+					else {
+						b.energy += a.energy/2;
+						a.energy = 0;
+					}
+				}
+			}
+	}
+	
 	public static void displayWorld() {
 		System.out.print("+");
 		for(int i=0; i<Params.world_width; i+=1){
@@ -229,8 +250,8 @@ public abstract class Critter {
 				// ==========================
 				boolean critterPrinted = false;
 				for(Critter c : population){
-					if(c.x_coord == i && c.y_coord == k) {
-						System.out.print(c.energy);
+					if(c.x_coord == k && c.y_coord == i) {
+						System.out.print(c);
 						critterPrinted = true;
 						break;
 					}
