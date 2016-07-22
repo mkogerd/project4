@@ -22,32 +22,41 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
 		String[] cmd = new String[0];
-		
+		String line = null;
 		while(cmd.length == 0 || !cmd[0].equals("quit")) {
-			cmd = kb.nextLine().split(" "); // Get user command
-			if(cmd.length != 0) {
-				switch (cmd[0]) {
-				case "show" :
-					Critter.displayWorld();
-					break;
-				case "step" :
-					step(cmd);
-					break;
-				case "seed" :
-					Critter.setSeed(Integer.parseInt(cmd[1]));
-					break;
-				case "make" :
-					make(cmd[1], Integer.parseInt(cmd[2]));
-					break;
-				case "stats" :
-					stats(cmd[1]);
-					break;
-				case "quit" :
-					break;
-				default :
-					System.out.println("Invalid Command");
+			line = kb.nextLine();
+			cmd = line.split(" "); // Get user command
+			try {
+				if(cmd.length != 0) {
+					switch (cmd[0]) {
+					case "show" :
+						Critter.displayWorld();
+						break;
+					case "step" :
+						step(cmd);
+						break;
+					case "seed" :
+						Critter.setSeed(Integer.parseInt(cmd[1]));
+						break;
+					case "make" :
+						make(cmd[1], Integer.parseInt(cmd[2]));
+						break;
+					case "stats" :
+						stats(cmd[1]);
+						break;
+					case "quit" :
+						break;
+					default :
+						throw new Exception();
+					}
 				}
 			}
+			catch (IllegalArgumentException e) {
+				System.out.println("Error Processing: " + line);
+			}
+			catch (Exception e) {
+				System.out.println("Invalid Command: " + line);
+			} 
 		}
 		kb.close();
 	}
@@ -60,9 +69,10 @@ public class Main {
 			for(int i =0; i < Integer.parseInt(cmd[1]); i+=1)
 				Critter.worldTimeStep();
 			} catch(NumberFormatException e) {
-				System.out.println("Bad Number format");
+				throw new IllegalArgumentException();
 			}
 		}
+		else throw new IllegalArgumentException();
 	}
 	
 	// Function to make a new Critter
@@ -71,8 +81,8 @@ public class Main {
 			for (int i = 0; i < n; i+=1) {
 				Critter.makeCritter(name);
 			}
-		} catch (InvalidCritterException e) {
-			System.out.println("Invalid Critter");
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
 		}
 	}
 	
@@ -84,30 +94,16 @@ public class Main {
 		// Get specified critter list
 		try {
 			list = Critter.getInstances(critter_class_name);
-		} catch (InvalidCritterException e) {
-			System.out.println("Invalid Critter Name");
-		}
 		
-		Class<?> myCritter = null;
-		Method method = null;
-		
-		try {
+			Class<?> myCritter = null;
+			Method method = null;
+
 			myCritter = Class.forName(critter_class_name);	// Get class object corresponding to s
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		try {
+
 			method = myCritter.getMethod("runStats", List.class);
-		} catch (NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
 			method.invoke(null, list);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
 		}
 		
 	}

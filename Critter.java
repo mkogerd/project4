@@ -151,7 +151,7 @@ public abstract class Critter {
 		try {
 			myCritter = Class.forName(critter_class_name);	// Get class object corresponding to s
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new InvalidCritterException(critter_class_name);
 		}	
 		
 		// Populate result array
