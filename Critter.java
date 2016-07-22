@@ -121,6 +121,22 @@ public abstract class Critter {
 	
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
+		
+		for (Critter c: population) {
+			switch (critter_class_name) {
+			case "project4.Craig":
+				if (c.toString().equals("C"))
+					result.add(c);
+				break;
+			case "project4.Algae":
+				if (c.toString().equals("@"))
+					result.add(c);
+				break;
+			default : 
+				throw new InvalidCritterException(critter_class_name);
+			}
+		}
+			
 	
 		return result;
 	}
