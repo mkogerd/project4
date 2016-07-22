@@ -12,6 +12,8 @@
  */
 
 package project4;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,7 +31,7 @@ public class Main {
 					Critter.displayWorld();
 					break;
 				case "step" :
-					Critter.worldTimeStep();
+					step(cmd);
 					break;
 				case "seed" :
 					Critter.setSeed(Integer.parseInt(cmd[1]));
@@ -48,6 +50,19 @@ public class Main {
 			}
 		}
 		kb.close();
+	}
+	
+	public static void step (String[] cmd) {
+		if (cmd.length == 1)
+			Critter.worldTimeStep();
+		else if(cmd.length == 2) {
+			try {
+			for(int i =0; i < Integer.parseInt(cmd[1]); i+=1)
+				Critter.worldTimeStep();
+			} catch(NumberFormatException e) {
+				System.out.println("Bad Number format");
+			}
+		}
 	}
 	
 	// Function to make a new Critter
@@ -73,23 +88,26 @@ public class Main {
 			System.out.println("Invalid Critter Name");
 		}
 		
-		// Print critter stats
-		switch (critter_class_name) {
-		case "project4.Craig":
-			Craig.runStats(list);
-			break;
-		case "project4.BoxMan":
-			BoxMan.runStats(list);
-			break;
-		case "project4.Worm":
-			Worm.runStats(list);
-			break;
-		case "project4.Snail":
-			Snail.runStats(list);
-			break;
-		case "project4.Ohm":
-			Ohm.runStats(list);
-			break;
+		Class<?> myCritter = null;
+		Method method = null;
+		
+		try {
+			myCritter = Class.forName(critter_class_name);	// Get class object corresponding to s
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			method = myCritter.getMethod("runStats", List.class);
+		} catch (NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			method.invoke(null, list);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

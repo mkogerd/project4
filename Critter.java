@@ -13,6 +13,8 @@
 
 package project4;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,70 +102,62 @@ public abstract class Critter {
 	 * an InvalidCritterException must be thrown
 	 */
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
-		Critter temp;
-		switch(critter_class_name){
-		case "Craig" :
-			temp = new Craig();
-			break;
-		case "Algae" :
-			temp = new Algae();
-			break;
-		case "BoxMan" :
-			temp = new BoxMan();
-			break;
-		case "Worm" :
-			temp = new Worm();
-			break;
-		case "Snail" :
-			temp = new Snail();
-			break;
-		case "Ohm" :
-			temp = new Ohm();
-			break;
-		default :
-			throw new InvalidCritterException(critter_class_name);		
-		}
-		temp.x_coord = getRandomInt(Params.world_width);	// Set starting coordinates
-		temp.y_coord = getRandomInt(Params.world_height);
-		temp.energy = Params.start_energy;					// Set starting energy
-		population.add(temp);								// Add the critter
+		
+		Class<?> myCritter = null;
+		Constructor<?> constructor = null;
+		Object instanceOfMyCritter = null;
+		
+		try {
+			myCritter = Class.forName(critter_class_name);	// Get class object corresponding to s
+			constructor = myCritter.getConstructor();		// get null parameter constructor
+			instanceOfMyCritter = constructor.newInstance();// create instance
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		Critter me = (Critter)instanceOfMyCritter; // Cast to critter
+	
+		me.x_coord = getRandomInt(Params.world_width);	// Set starting coordinates
+		me.y_coord = getRandomInt(Params.world_height);
+		me.energy = Params.start_energy;					// Set starting energy
+		population.add(me);								// Add the critter
 
 	}
 	
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
 		
-		for (Critter c: population) {
-			switch (critter_class_name) {
-			case "project4.Craig":
-				if (c.toString().equals("C"))
-					result.add(c);
-				break;
-			case "project4.Algae":
-				if (c.toString().equals("@"))
-					result.add(c);
-				break;
-			case "project4.BoxMan":
-				if (c.toString().equals(""))
-					result.add(c);
-				break;
-			case "project4.Worm":
-				if (c.toString().equals("~"))
-					result.add(c);
-				break;
-			case "project4.Snail":
-				if (c.toString().equals("S"))
-					result.add(c);
-				break;
-			case "project4.Ohm":
-				if (c.toString().equals("Ω"))
-					result.add(c);
-				break;
-			default : 
-				throw new InvalidCritterException(critter_class_name);
-			}
-		}
-			
+		// Find class using reflection
+		Class<?> myCritter = null;
+		try {
+			myCritter = Class.forName(critter_class_name);	// Get class object corresponding to s
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}	
+		
+		// Populate result array
+		for (Critter c: population) 
+			if (myCritter.isInstance(c))
+				result.add(c);	
 	
 		return result;
 	}
@@ -230,7 +224,7 @@ public abstract class Critter {
 		// 4. Add algae
 		for (int i = 0; i <Params.refresh_algae_count; i+=1) {
 			try {
-				makeCritter("Algae");
+				makeCritter("project4.Algae");
 			} catch (InvalidCritterException e) {
 				e.printStackTrace();
 			}
