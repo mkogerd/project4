@@ -85,6 +85,12 @@ public class Main {
 		case "project4.BoxMan":
 			BoxMan.runStats(list);
 			break;
+		case "project4.Worm":
+			Worm.runStats(list);
+			break;
+		case "project4.Snail":
+			Worm.runStats(list);
+			break;
 		/*case "project4.Algae":
 			break;*/
 		}

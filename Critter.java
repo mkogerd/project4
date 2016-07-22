@@ -112,6 +112,12 @@ public abstract class Critter {
 		case "BoxMan" :
 			temp = new BoxMan();
 			break;
+		case "Worm" :
+			temp = new Worm();
+			break;
+		case "Snail" :
+			temp = new Snail();
+			break;
 		default :
 			throw new InvalidCritterException(critter_class_name);		
 		}
@@ -137,6 +143,14 @@ public abstract class Critter {
 				break;
 			case "project4.BoxMan":
 				if (c.toString().equals(""))
+					result.add(c);
+				break;
+			case "project4.Worm":
+				if (c.toString().equals("~"))
+					result.add(c);
+				break;
+			case "project4.Snail":
+				if (c.toString().equals("S"))
 					result.add(c);
 				break;
 			default : 

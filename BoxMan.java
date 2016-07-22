@@ -1,6 +1,6 @@
 package project4;
 /*
- * BoxMans behave by turning at a 45 degree angle every other turn, always walking. Essentially,
+ * BoxMans behave by turning at a 90 degree angle every other turn, always walking. Essentially,
  * they trace out a 3x3 square. They enjoy reproducing at a low energy of 50.
  */
 public class BoxMan extends Critter {
