@@ -20,14 +20,20 @@ public class Snail extends Critter {
 		dir = Critter.getRandomInt(8);
 	}
 	
-	public boolean fight(String not_used) { return true; }
+	public boolean fight(String not_used) {
+		int num = Critter.getRandomInt(1);
+		if(num==0){
+			return true;
+		}
+			return false;
+	}
 
 	@Override
 	public void doTimeStep() {
 		/* take one step forward */
 		walk(dir);
 		
-		if (getEnergy() > 150) {
+		if (getEnergy() > (Params.min_reproduce_energy/2)) {
 			Snail child = new Snail();
 			for (int k = 0; k < 8; k += 1) {
 				child.genes[k] = this.genes[k];

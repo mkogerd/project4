@@ -23,7 +23,7 @@ public class Worm extends Critter {
 
 	@Override
 	public void doTimeStep() {
-		/* take one step forward */
+		/* take one run() forward */
 		run(dir);
 		
 		if (getEnergy() > (Params.min_reproduce_energy*2)) {
