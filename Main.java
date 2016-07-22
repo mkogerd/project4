@@ -46,15 +46,10 @@ public class Main {
 				}
 			}
 		}
-			//e.printStackTrace();
+		kb.close();
 	}
 	
-	// step
-	// show
-	// quit
-	// seed
-	
-	// make
+	// Function to make a new Critter
 	public static void make(String name, int n) {
 		try {
 			for (int i = 0; i < n; i+=1) {
@@ -65,7 +60,7 @@ public class Main {
 		}
 	}
 	
-	// stats
+	// Function to display stats
 	public static void stats(String critter_class_name) {
 		
 		List<Critter> list = null;
@@ -89,10 +84,11 @@ public class Main {
 			Worm.runStats(list);
 			break;
 		case "project4.Snail":
-			Worm.runStats(list);
+			Snail.runStats(list);
 			break;
-		/*case "project4.Algae":
-			break;*/
+		case "project4.Ohm":
+			Ohm.runStats(list);
+			break;
 		}
 		
 	}

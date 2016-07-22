@@ -1,21 +1,19 @@
 /* CRITTERS Critter.java
  * EE422C Project 4 submission by
  * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
- * <Student2 5-digit Unique No.>
+ * Michael Darden
+ * MKD788
+ * 76550
+ * Lei Liu
+ * LL28379
+ * 76550
  * Slip days used: <0>
  * Summer 2016
  */
 package project4;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /* see the PDF for descriptions of the methods and fields in this class
  * you may add fields, methods or inner classes to Critter ONLY if you make your additions private
@@ -39,7 +37,7 @@ public abstract class Critter {
 	private int energy = 0;
 	private boolean hasMoved;
 	protected int getEnergy() { return energy; }
-	
+	protected void addEnergy(int addition) {energy += addition; }
 	private int x_coord;
 	private int y_coord;
 	
@@ -118,6 +116,9 @@ public abstract class Critter {
 		case "Snail" :
 			temp = new Snail();
 			break;
+		case "Ohm" :
+			temp = new Ohm();
+			break;
 		default :
 			throw new InvalidCritterException(critter_class_name);		
 		}
@@ -151,6 +152,10 @@ public abstract class Critter {
 				break;
 			case "project4.Snail":
 				if (c.toString().equals("S"))
+					result.add(c);
+				break;
+			case "project4.Ohm":
+				if (c.toString().equals("Ω"))
 					result.add(c);
 				break;
 			default : 
@@ -210,8 +215,6 @@ public abstract class Critter {
 	private static List<Critter> babies = new java.util.ArrayList<Critter>();
 		
 	public static void worldTimeStep() {
-//		   0. timestep++;
-		
 		// 1. Loop through all of the critters in the collection, and call doTimeStep for each
 		for (Critter c : population)
 			c.doTimeStep();
@@ -219,11 +222,11 @@ public abstract class Critter {
 		// 2. doEncounters();
 		doEncounters();
 
-//		   3. Update rest energy - Do critters have to move every step? and if not - do they only rest when they don’t move. Yes, always - it’s the cost of living
+		// 3. Update rest energy - Do critters have to move every step? and if not - do they only rest when they don’t move. Yes, always - it’s the cost of living
 		for(Critter c : population)
 			c.energy -= Params.rest_energy_cost;
 		
-//		   4. Add algae
+		// 4. Add algae
 		for (int i = 0; i <Params.refresh_algae_count; i+=1) {
 			try {
 				makeCritter("Algae");
@@ -232,18 +235,18 @@ public abstract class Critter {
 			}
 		}
 		
-//		   5. Remove dead critters
+		// 5. Remove dead critters
 		List<Critter> dead = new ArrayList<Critter>();
 		for(Critter c : population)
 			if (c.energy <= 0)
 				dead.add(c);			// "Bring out your dead!"
 		population.removeAll(dead);		// Remove the dead
 		
-//		   6. add babies to population
+		// 6. add babies to population
 		population.addAll(babies);		// Dump-truck crib into the real world
 		babies.clear();					// Prevent immortal babies
 		
-//		   7. Reset move flags
+		// 7. Reset move flags
 		for (Critter c: population)
 			c.hasMoved = false;
 	}
