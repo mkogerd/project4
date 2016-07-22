@@ -1,3 +1,15 @@
+/* CRITTERS <MyClass.java>
+ * EE422C Project 4 submission by
+ * Replace <...> with your actual data.
+ * Michael Darden
+ * MKD788
+ * 76550
+ * Lei Liu
+ * LL28379
+ * 76550
+ * Slip days used: <0>
+ * Summer 2016
+ */
 //Worms will always try to run instead of fight
 //Worms takes twice the energy of min_reproduce_energy*2 to reproduce
 //Worms only do the run function and not walk

@@ -1,4 +1,18 @@
+/* CRITTERS <MyClass.java>
+ * EE422C Project 4 submission by
+ * Replace <...> with your actual data.
+ * Michael Darden
+ * MKD788
+ * 76550
+ * Lei Liu
+ * LL28379
+ * 76550
+ * Slip days used: <0>
+ * Summer 2016
+ */
+
 package project4;
+
 /*
  * BoxMans behave by turning at a 90 degree angle every other turn, always walking. Essentially,
  * they trace out a 3x3 square. They enjoy reproducing at a low energy of 50.
