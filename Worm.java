@@ -1,4 +1,4 @@
-//Worms will always try to run isntead of fight
+//Worms will always try to run instead of fight
 //Worms takes twice the energy of min_reproduce_energy*2 to reproduce
 //Worms only do the run function and not walk
 package project4;
