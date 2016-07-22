@@ -109,6 +109,9 @@ public abstract class Critter {
 		case "Algae" :
 			temp = new Algae();
 			break;
+		case "BoxMan" :
+			temp = new BoxMan();
+			break;
 		default :
 			throw new InvalidCritterException(critter_class_name);		
 		}
@@ -130,6 +133,10 @@ public abstract class Critter {
 				break;
 			case "project4.Algae":
 				if (c.toString().equals("@"))
+					result.add(c);
+				break;
+			case "project4.BoxMan":
+				if (c.toString().equals(""))
 					result.add(c);
 				break;
 			default : 
