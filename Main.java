@@ -52,7 +52,7 @@ public class Main extends Application {
 			grid.add(critNameField, 1, row);
 			
 			// Add Field for No. of Critters
-			Label numCrits = new Label("No of critters:");
+			Label numCrits = new Label("Number of critters:");
 			row++;
 			grid.add(numCrits, 0, row);
 			TextField critNumField = new TextField();
@@ -100,6 +100,36 @@ public class Main extends Application {
 					actionTarget.setText("TODO: message to display how many Critters added etc.");	
 					Critter.displayWorld(); // Optional
 				}			
+			});
+			
+			//Label for steps to take and text box for user to input how many steps to take
+			Label stepName = new Label("Number of steps to take:");
+			grid.add(stepName,  0, row);
+			TextField stepNameField = new TextField();
+			grid.add(stepNameField, 1, row);
+			
+			//Add button to take steps
+			Button stepBtn = new Button("Take steps");
+			HBox hbstepBtn = new HBox(10);
+			hbstepBtn.setAlignment(Pos.BOTTOM_RIGHT);
+			hbstepBtn.getChildren().add(stepBtn);
+			row += 2;
+			grid.add(hbstepBtn, 1, row);
+			
+			stepBtn.setOnAction(new EventHandler<ActionEvent>(){
+				@Override
+				public void handle(ActionEvent event){
+					String stepNumber = stepNameField.getText();
+					try{
+						for(int i = 0; i < Integer.parseInt(stepNumber); i+=1){
+							Critter.worldTimeStep();
+						}
+					}
+						catch (Exception e){
+							throw new IllegalArgumentException();
+						}
+						Critter.displayWorld();
+					}
 			});
 			
 
