@@ -68,9 +68,28 @@ public class Main extends Application {
 			grid.add(hbAddBtn, 1, row);
 			
 			// Action when Add Critters Button is pressed.
-			final Text actionTarget = new Text();
+			final Text addActionTarget = new Text();
+			hbAddBtn.getChildren().add(0, addActionTarget);
+			
+			// Add Field for seed No.
+			Label seed = new Label("Seed:");
+			row++;
+			grid.add(seed, 0, row);
+			TextField seedField = new TextField();
+			//row++;
+			grid.add(seedField, 1, row);
+			
+			// Add Button to change Seed.
+			Button seedBtn = new Button("Set Seed");
+			HBox hbSeedBtn = new HBox(10);
+			hbSeedBtn.setAlignment(Pos.BOTTOM_RIGHT);
+			hbSeedBtn.getChildren().add(seedBtn);
 			row += 2;
-			grid.add(actionTarget, 1, row);
+			grid.add(hbSeedBtn, 1, row);
+			
+			// Action when Add Critters Button is pressed.
+			final Text seedActionTarget = new Text();
+			hbSeedBtn.getChildren().add(0, seedActionTarget);
 			
 			//grid.setGridLinesVisible(true);
 			
@@ -78,32 +97,43 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
+			
+						
 			// Action when add critters button is pressed. Call makeCritter.
 			// Uses something called an anonymous class of type EventHandler<ActionEvent>, which is a class that is
 			// defined inline, in the curly braces.
 			addBtn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					String name = critNameField.getText();
-					String numString = critNumField.getText();
-					
-					// ========== ADDED CODE ==========
+					String name = critNameField.getText();				// Type of critter to make
+					int num = Integer.parseInt(critNumField.getText());	// Number of critters to make
 					try {
-						for (int i = 0; i < Integer.parseInt(numString); i+=1) {
+						for (int i = 0; i < num; i+=1)					// Make all the critters
 							Critter.makeCritter(name);
-						}
 					} catch (Exception e) {
 						throw new IllegalArgumentException();
 					}
-					// ========== ========== ==========
-					actionTarget.setFill(Color.FIREBRICK);
-					actionTarget.setText("TODO: message to display how many Critters added etc.");	
+					addActionTarget.setFill(Color.FIREBRICK);
+					addActionTarget.setText(num + " " + name + " critters added");	
+					Critter.displayWorld(); // Optional
+				}			
+			});
+			
+			// Action when set seed button is pressed. Call setSeed.
+			seedBtn.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					long newSeed = Long.parseLong(seedField.getText());	// Convert the new seed string to a long
+					Critter.setSeed(newSeed);								// Apply the new seed
+					seedActionTarget.setFill(Color.FIREBRICK);				// Font color
+					seedActionTarget.setText("Seed set to " + newSeed);		// Print change
 					Critter.displayWorld(); // Optional
 				}			
 			});
 			
 			//Label for steps to take and text box for user to input how many steps to take
 			Label stepName = new Label("Number of steps to take:");
+			row++;
 			grid.add(stepName,  0, row);
 			TextField stepNameField = new TextField();
 			grid.add(stepNameField, 1, row);
@@ -120,16 +150,15 @@ public class Main extends Application {
 				@Override
 				public void handle(ActionEvent event){
 					String stepNumber = stepNameField.getText();
-					try{
+					try {
 						for(int i = 0; i < Integer.parseInt(stepNumber); i+=1){
 							Critter.worldTimeStep();
 						}
-					}
-						catch (Exception e){
+					} catch (Exception e){
 							throw new IllegalArgumentException();
-						}
-						Critter.displayWorld();
 					}
+					Critter.displayWorld();
+				}
 			});
 			
 
