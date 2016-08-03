@@ -44,11 +44,21 @@ public class Main extends Application {
 			
 			int row = 0;
 			
+			// Add Buttons to run and stop Simulation.
+			Button runBtn = new Button("Run");
+			Button stopBtn = new Button("Stop");
+			HBox hbSimBtns = new HBox(10);
+			hbSimBtns.setAlignment(Pos.CENTER);
+			hbSimBtns.getChildren().add(runBtn);
+			hbSimBtns.getChildren().add(stopBtn);
+			//row += 2;
+			grid.add(hbSimBtns, 1, row);
+			
 			// Add Field for Critter type.
+			row++;
 			Label critName = new Label("Critter Name (e.g. Algae):");
 			grid.add(critName, 0, row);
 			TextField critNameField = new TextField();
-			//row++;
 			grid.add(critNameField, 1, row);
 			
 			// Add Field for No. of Critters
@@ -106,14 +116,29 @@ public class Main extends Application {
 			row += 2;
 			grid.add(hbstepBtn, 1, row);
 			
-			//grid.setGridLinesVisible(true);
+			grid.setGridLinesVisible(true);
 			
 			Scene scene = new Scene(grid, 500, 1000);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
+			// Action when set seed button is pressed. Call setSeed. IN PROGRESS
+			/*runBtn.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					while(!stopBtn.isHover()) {
+						Critter.displayWorld();
+						System.out.println(stopBtn.isHover());
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}			
+			});*/
 			
-						
 			// Action when add critters button is pressed. Call makeCritter specified # of times.
 			// Uses something called an anonymous class of type EventHandler<ActionEvent>, which is a class that is
 			// defined inline, in the curly braces.
@@ -172,7 +197,6 @@ public class Main extends Application {
 		launch(args);
 	}
 }
-
 /* ========== Pre Java-FX stuff ==========
 import java.lang.reflect.Method;
 import java.util.List;
