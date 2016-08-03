@@ -20,8 +20,11 @@ public class Params {
 	public final static int rest_energy_cost = 0;
 	public final static int min_reproduce_energy = 20;
 	public final static int refresh_algae_count = 10;
-
+	public final static int scene_x = 10;
+	public final static int scene_y = 10;
+	
+	
 	public static final int photosynthesis_energy_amount = 1;
 	public static final int start_energy = 100;
-
+	
 }

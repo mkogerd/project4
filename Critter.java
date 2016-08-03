@@ -18,6 +18,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.Scene;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
 /* see the PDF for descriptions of the methods and fields in this class
  * you may add fields, methods or inner classes to Critter ONLY if you make your additions private
  * no new public, protected or default-package code or data can be added to Critter
@@ -307,6 +321,36 @@ public abstract class Critter {
 	}
 	
 	public static void displayWorld() {
+		Stage world = new Stage();
+		
+		GridPane grid = new GridPane();
+		for(int i = 0; i<Params.world_height; i +=1){
+			RowConstraints rc = new RowConstraints();
+			rc.setPercentHeight(100/Params.world_height);
+			rc.setValignment(VPos.CENTER);
+			grid.getRowConstraints().add(rc);
+		}
+		for(int i = 0; i<Params.world_width; i +=1){
+			ColumnConstraints cc = new ColumnConstraints();
+			cc.setPercentWidth(100/Params.world_width);
+			cc.setHalignment(HPos.CENTER);
+			grid.getColumnConstraints().add(cc);
+		}
+
+
+		
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
+		
+		Paint color = Color.BLUE;
+		grid.add(new Circle(20, color), 3, 3);
+		
+		Scene scene = new Scene(grid, Params.scene_x, Params.scene_y);
+		grid.setGridLinesVisible(true);
+		world.setScene(scene);
+		world.show();
 		System.out.print("+");
 		for(int i=0; i<Params.world_width; i+=1){
 			System.out.print("-");

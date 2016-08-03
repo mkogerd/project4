@@ -57,7 +57,9 @@ public class Main extends Application {
 			hbSimBtns.getChildren().add(runBtn);
 			hbSimBtns.getChildren().add(stopBtn);
 			//row += 2;
-			grid.add(hbSimBtns, 1, row);
+	
+			grid.add(hbSimBtns, 0, row);
+			grid.setColumnSpan(hbSimBtns, 2);
 			
 			// Add Field for Critter type.
 			row++;
