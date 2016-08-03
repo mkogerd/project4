@@ -13,18 +13,23 @@
 
 package project4;
 
+//import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+//import javafx.scene.Group;
 import javafx.scene.Scene;
+//import javafx.scene.canvas.Canvas;
+//import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+//import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -121,23 +126,53 @@ public class Main extends Application {
 			Scene scene = new Scene(grid, 500, 1000);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+			/*
+			// Attempting to get things moving
+			Group root = new Group();
+		    Scene theScene = new Scene( root );
+		    primaryStage.setScene( theScene );
+		 
+		    Canvas canvas = new Canvas( 512, 512 );
+		    root.getChildren().add( canvas );
+			GraphicsContext gc = canvas.getGraphicsContext2D();
+			final long startNanoTime = System.nanoTime();
+		    new AnimationTimer()
+		    {
+		    	@Override
+		        public void handle(long currentNanoTime)
+		        {
+		            double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
+		 
+		            System.out.println(t);
+		            double x = 232 + 128 * Math.cos(t);
+		            double y = 232 + 128 * Math.sin(t);
+		            if (t > 2 && t < 3) {
+		            	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		            	stop();
+		            }
+		            // background image clears canvas
+		            gc.fillRect(x, y, 5, 5);
+		            gc.setFill(Paint.valueOf("BLUE"));
+		        }
+		    }.start();
+		    
+		    stop();
+		    
+		    primaryStage.show();
+		    */
 			// Action when set seed button is pressed. Call setSeed. IN PROGRESS
-			/*runBtn.setOnAction(new EventHandler<ActionEvent>() {
+			runBtn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					while(!stopBtn.isHover()) {
-						Critter.displayWorld();
-						System.out.println(stopBtn.isHover());
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					Critter.displayWorld();
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}			
-			});*/
+			});
 			
 			// Action when add critters button is pressed. Call makeCritter specified # of times.
 			// Uses something called an anonymous class of type EventHandler<ActionEvent>, which is a class that is
