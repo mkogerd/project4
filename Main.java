@@ -91,6 +91,21 @@ public class Main extends Application {
 			final Text seedActionTarget = new Text();
 			hbSeedBtn.getChildren().add(0, seedActionTarget);
 			
+			//Label for steps to take and text box for user to input how many steps to take
+			Label stepName = new Label("Number of steps to take:");
+			row++;
+			grid.add(stepName,  0, row);
+			TextField stepNameField = new TextField();
+			grid.add(stepNameField, 1, row);
+			
+			//Add button to take steps
+			Button stepBtn = new Button("Take steps");
+			HBox hbstepBtn = new HBox(10);
+			hbstepBtn.setAlignment(Pos.BOTTOM_RIGHT);
+			hbstepBtn.getChildren().add(stepBtn);
+			row += 2;
+			grid.add(hbstepBtn, 1, row);
+			
 			//grid.setGridLinesVisible(true);
 			
 			Scene scene = new Scene(grid, 500, 1000);
@@ -99,7 +114,7 @@ public class Main extends Application {
 			
 			
 						
-			// Action when add critters button is pressed. Call makeCritter.
+			// Action when add critters button is pressed. Call makeCritter specified # of times.
 			// Uses something called an anonymous class of type EventHandler<ActionEvent>, which is a class that is
 			// defined inline, in the curly braces.
 			addBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -123,7 +138,7 @@ public class Main extends Application {
 			seedBtn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					long newSeed = Long.parseLong(seedField.getText());	// Convert the new seed string to a long
+					long newSeed = Long.parseLong(seedField.getText());		// Convert the new seed string to a long
 					Critter.setSeed(newSeed);								// Apply the new seed
 					seedActionTarget.setFill(Color.FIREBRICK);				// Font color
 					seedActionTarget.setText("Seed set to " + newSeed);		// Print change
@@ -131,21 +146,7 @@ public class Main extends Application {
 				}			
 			});
 			
-			//Label for steps to take and text box for user to input how many steps to take
-			Label stepName = new Label("Number of steps to take:");
-			row++;
-			grid.add(stepName,  0, row);
-			TextField stepNameField = new TextField();
-			grid.add(stepNameField, 1, row);
-			
-			//Add button to take steps
-			Button stepBtn = new Button("Take steps");
-			HBox hbstepBtn = new HBox(10);
-			hbstepBtn.setAlignment(Pos.BOTTOM_RIGHT);
-			hbstepBtn.getChildren().add(stepBtn);
-			row += 2;
-			grid.add(hbstepBtn, 1, row);
-			
+			// Action when set take steps button is pressed. Call step specified # of times.
 			stepBtn.setOnAction(new EventHandler<ActionEvent>(){
 				@Override
 				public void handle(ActionEvent event){
