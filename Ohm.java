@@ -100,4 +100,6 @@ public class Ohm extends Critter {
 	}
 	public CritterShape viewShape() { return CritterShape.STAR; }
 	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.YELLOW; }
+	public javafx.scene.paint.Color viewOutlineColor() { return javafx.scene.paint.Color.BLACK; }
+	
 }
