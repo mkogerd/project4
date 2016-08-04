@@ -27,9 +27,11 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -323,6 +325,7 @@ public abstract class Critter {
 	public static void displayWorld() {
 		Stage world = new Stage();
 		
+		// Add adjustable size columns and rows according to world parameters
 		GridPane grid = new GridPane();
 		for(int i = 0; i<Params.world_height; i +=1){
 			RowConstraints rc = new RowConstraints();
@@ -338,19 +341,41 @@ public abstract class Critter {
 		}
 
 
-		
+		// Set the borders to be a line rather than a gap
+		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(0);
 		grid.setVgap(0);
 		grid.setPadding(new Insets(0,0,0,0));
-		
-		Paint color = Color.BLUE;
-		grid.add(new Circle(20, color), 3, 3);
+		System.out.println(grid.getBoundsInLocal().getWidth());
 		
 		Scene scene = new Scene(grid, Params.scene_x, Params.scene_y);
-		grid.setGridLinesVisible(true);
+		// Attempt to resize a circle based on grid
+		//Circle circ = new Circle(grid.getBoundsInLocal().getWidth()/Params.world_width, Color.BLUE);
+		
+		// Put the little dudes in ==============
+		for (Critter c: population) {
+			Shape shape = null;
+			switch (c.viewShape()) {
+			case CIRCLE:
+				shape = new Circle(10, c.viewColor());
+				break;
+			case SQUARE:
+				break;
+			case TRIANGLE:
+			case DIAMOND:
+			case STAR:
+			}
+			if (shape != null)
+				grid.add(shape, c.x_coord, c.y_coord);
+		}
+		// ======================================
+		
+		
+		// Old stuff
 		world.setScene(scene);
 		world.show();
+		
 		System.out.print("+");
 		for(int i=0; i<Params.world_width; i+=1){
 			System.out.print("-");
