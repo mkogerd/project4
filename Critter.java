@@ -340,9 +340,9 @@ public abstract class Critter {
 
 		
 		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setHgap(0);
+		grid.setVgap(0);
+		grid.setPadding(new Insets(0,0,0,0));
 		
 		Paint color = Color.BLUE;
 		grid.add(new Circle(20, color), 3, 3);
