@@ -72,6 +72,22 @@ public abstract class Critter {
 	public abstract CritterShape viewShape(); 
 	
 	protected String look(int direction, boolean steps) {
+		// Find coordinates to look at
+		int xLook = this.x_coord;
+		int yLook = this.y_coord;
+		if (direction == 7 || direction == 0 || direction == 1)
+			xLook ++;
+		if (direction == 3 || direction == 4 || direction == 5)
+			xLook --;
+		if (direction == 5 || direction == 6 || direction == 7)
+			yLook ++;
+		if (direction == 1 || direction == 2 || direction == 3)
+			yLook --;
+		
+		for (Critter b: population)
+			if (xLook == b.x_coord && yLook == b.y_coord)	// See if an element is at specified look location
+				return b.toString();
+		
 		return null;
 	}
 	
@@ -274,7 +290,7 @@ public abstract class Critter {
 			c.energy -= Params.rest_energy_cost;
 		
 		// 4. Add algae
-		for (int i = 0; i <Params.refresh_algae_count; i+=1) {
+		for (int i = 0; i < Params.refresh_algae_count; i+=1) {
 			try {
 				makeCritter("project4.Algae");
 			} catch (InvalidCritterException e) {
@@ -348,7 +364,6 @@ public abstract class Critter {
 		grid.setHgap(0);
 		grid.setVgap(0);
 		grid.setPadding(new Insets(0,0,0,0));
-		System.out.println(grid.getBoundsInLocal().getWidth());
 		
 		Scene scene = new Scene(grid, Params.scene_x, Params.scene_y);
 		// Attempt to resize a circle based on grid
@@ -381,41 +396,7 @@ public abstract class Critter {
 			}
 		}
 		
-		
-		// Old stuff
 		world.setScene(scene);
 		world.show();
-		
-		System.out.print("+");
-		for(int i=0; i<Params.world_width; i+=1){
-			System.out.print("-");
-		}
-		System.out.println("+");
-		
-		for(int i = 0; i < Params.world_height; i+=1){
-			System.out.print("|");
-			for(int k = 0; k<Params.world_width; k+=1){
-				// ==========================
-				boolean critterPrinted = false;
-				for(Critter c : population){
-					if(c.x_coord == k && c.y_coord == i) {
-						System.out.print(c);
-						critterPrinted = true;
-						break;
-					}
-				}
-				if (!critterPrinted)
-					System.out.print(" ");
-				// ===========================
-			}
-			System.out.println("|");
-		}
-		
-		System.out.print("+");
-		for(int i=0; i<Params.world_width; i+=1){
-			System.out.print("-");
-		}
-		System.out.println("+");
-		
 	}
 }
