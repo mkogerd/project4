@@ -31,6 +31,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
@@ -322,9 +324,8 @@ public abstract class Critter {
 			}
 	}
 	
+	private static Stage world = new Stage();
 	public static void displayWorld() {
-		Stage world = new Stage();
-		
 		// Add adjustable size columns and rows according to world parameters
 		GridPane grid = new GridPane();
 		for(int i = 0; i<Params.world_height; i +=1){
@@ -353,23 +354,32 @@ public abstract class Critter {
 		// Attempt to resize a circle based on grid
 		//Circle circ = new Circle(grid.getBoundsInLocal().getWidth()/Params.world_width, Color.BLUE);
 		
-		// Put the little dudes in ==============
+		// Add the critters to the gym according to shape
 		for (Critter c: population) {
 			Shape shape = null;
 			switch (c.viewShape()) {
 			case CIRCLE:
-				shape = new Circle(10, c.viewColor());
+				shape = new Circle(10);
 				break;
 			case SQUARE:
+				shape = new Rectangle(20, 20);
 				break;
 			case TRIANGLE:
+				shape = new Polygon(0, 20, 10, 0, 20, 20);
+				break;
 			case DIAMOND:
+				shape = new Polygon(0, 10, 10, 0, 20, 10, 10, 20);
+				break;
 			case STAR:
+				shape = new Polygon(0, 7, 6, 7, 10, 0, 14, 7, 20, 7, 14, 12, 20, 20, 10, 14, 0, 20, 6, 12);
+				break;
 			}
-			if (shape != null)
+			if (shape != null) {
+				shape.setFill(c.viewColor());
+				shape.setStroke(c.viewOutlineColor()); 
 				grid.add(shape, c.x_coord, c.y_coord);
+			}
 		}
-		// ======================================
 		
 		
 		// Old stuff
