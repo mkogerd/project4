@@ -10,6 +10,7 @@
  * Slip days used: <0>
  * Summer 2016
  */
+
 package project4;
 
 public class Craig extends Critter {
@@ -81,4 +82,11 @@ public class Craig extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * craigs.size()) + "% left   ");
 		System.out.println();
 	}
+	
+	@Override
+	public CritterShape viewShape() { return CritterShape.SQUARE; }
+
+	@Override
+	public javafx.scene.paint.Color viewOutlineColor() { return javafx.scene.paint.Color.BLUE; }
+
 }
