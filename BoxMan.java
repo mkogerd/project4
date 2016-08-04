@@ -13,6 +13,8 @@
 
 package project4;
 
+import project4.Critter.CritterShape;
+
 /*
  * BoxMans behave by turning at a 90 degree angle every other turn, always walking. Essentially,
  * they trace out a 3x3 square. They enjoy reproducing at a low energy of 50.
@@ -81,4 +83,7 @@ public class BoxMan extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * boxmans.size()) + "% left   ");
 		System.out.println();
 	}
+	
+	public CritterShape viewShape() { return CritterShape.SQUARE; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.BROWN; }
 }

@@ -16,6 +16,8 @@
 //Will be shown by an S on the world
 package project4;
 
+import project4.Critter.CritterShape;
+
 public class Snail extends Critter {
 	
 	@Override
@@ -90,4 +92,6 @@ public class Snail extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * snails.size()) + "% left   ");
 		System.out.println();
 	}
+	public CritterShape viewShape() { return CritterShape.TRIANGLE; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.BLACK; }
 }

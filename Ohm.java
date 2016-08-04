@@ -11,6 +11,9 @@
  * Summer 2016
  */
 package project4;
+
+import project4.Critter.CritterShape;
+
 /*
  * When the ohm critter gets low on energy, it will abstain from moving for 5 turns, causing it to gain 
  * energy so that it may walk for 5 more turns afterwards. The cycle repeats indefinitely, so something
@@ -95,4 +98,6 @@ public class Ohm extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * ohms.size()) + "% left   ");
 		System.out.println();
 	}
+	public CritterShape viewShape() { return CritterShape.STAR; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.YELLOW; }
 }

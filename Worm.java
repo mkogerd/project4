@@ -15,6 +15,8 @@
 //Worms only do the run function and not walk
 package project4;
 
+import project4.Critter.CritterShape;
+
 public class Worm extends Critter {
 	
 	@Override
@@ -84,4 +86,6 @@ public class Worm extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * worms.size()) + "% left   ");
 		System.out.println();
 	}
+	public CritterShape viewShape() { return CritterShape.DIAMOND; }
+	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.RED; }
 }
