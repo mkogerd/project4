@@ -34,11 +34,8 @@ public class Craig extends Critter {
 	@Override
 	public void doTimeStep() {
 		/* take one step forward */
-		if(look2(dir).equals(null)){
+		if(look2(dir) != null){		// Lunges towards other critters
 			run(dir);
-		}
-		if(look(dir).equals(null)){
-			walk(dir);
 		}
 		else{
 			walk(dir);

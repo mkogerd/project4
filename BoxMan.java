@@ -41,7 +41,7 @@ public class BoxMan extends Critter {
 	@Override
 	public void doTimeStep() {
 		/* take one step forward */
-		if(look(dir).equals(null)){
+		if(look(dir) == null || look(dir).equals("@")){
 			walk(dir);
 		}
 		else{
