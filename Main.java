@@ -13,33 +13,56 @@
 
 package project4;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.animation.AnimationTimer;
-//import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-//import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
-//import javafx.scene.canvas.Canvas;
-//import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-//import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
 	private boolean running = false;
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	// Utilizing the new controller
 	@Override
 	public void start(Stage primaryStage) {
+		
+		try {
+            TitledPane page = (TitledPane) FXMLLoader.load(Main.class.getResource("Controller.fxml"));
+            Scene scene = new Scene(page);  
+            primaryStage.setTitle("FXML is Simple");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	}
+
+	/*	OLD STUFF
+	@Override
+	public void start(Stage primaryStage) { 
 		try {
 			primaryStage.setTitle("Java FX Critters");
 			
@@ -131,7 +154,6 @@ public class Main extends Application {
 			Scene scene = new Scene(grid, 500, 1000);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			//GraphicsContext graphics = canvas.getGraphicsContext2D();
 			
 			// =============== Animation ===============
 			new AnimationTimer() {
@@ -218,11 +240,8 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();		
 		}
-	}
+		*/
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
 }
 /* ========== Pre Java-FX stuff ==========
 import java.lang.reflect.Method;
