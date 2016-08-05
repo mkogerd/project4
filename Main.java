@@ -13,6 +13,7 @@
 
 package project4;
 
+import javafx.animation.AnimationTimer;
 //import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 //import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 //import javafx.scene.canvas.Canvas;
 //import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -128,51 +130,37 @@ public class Main extends Application {
 			Scene scene = new Scene(grid, 500, 1000);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			/*
-			// Attempting to get things moving
-			Group root = new Group();
-		    Scene theScene = new Scene( root );
-		    primaryStage.setScene( theScene );
-		 
-		    Canvas canvas = new Canvas( 512, 512 );
-		    root.getChildren().add( canvas );
-			GraphicsContext gc = canvas.getGraphicsContext2D();
-			final long startNanoTime = System.nanoTime();
-		    new AnimationTimer()
-		    {
-		    	@Override
-		        public void handle(long currentNanoTime)
-		        {
-		            double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
-		 
-		            System.out.println(t);
-		            double x = 232 + 128 * Math.cos(t);
-		            double y = 232 + 128 * Math.sin(t);
-		            if (t > 2 && t < 3) {
-		            	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		            	stop();
-		            }
-		            // background image clears canvas
-		            gc.fillRect(x, y, 5, 5);
-		            gc.setFill(Paint.valueOf("BLUE"));
-		        }
-		    }.start();
-		    
-		    stop();
-		    
-		    primaryStage.show();
-		    */
-			// Action when set seed button is pressed. Call setSeed. IN PROGRESS
+			//GraphicsContext graphics = canvas.getGraphicsContext2D();
+			
+			// =============== Animation ===============
+			new AnimationTimer() {
+	            @Override public void handle(long currentNanoTime) {
+	                try {
+	                	if ( Critter.running ) {
+	                		Critter.worldTimeStep();
+	                		Critter.displayWorld();
+	                		Thread.sleep(100);
+	                	}
+	                } catch (InterruptedException e) {
+	                    // Do nothing
+	                }
+	            }
+	        }.start();
+			
+	        // ================ Action Event Handlers ===============
+			// Action when run button is pressed. sets a flag. IN PROGRESS
 			runBtn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					Critter.displayWorld();
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					Critter.running = true;
+				}			
+			});
+			
+			// Action when stop button is pressed. sets a flag. IN PROGRESS
+			stopBtn.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					Critter.running = false;
 				}			
 			});
 			
@@ -224,6 +212,7 @@ public class Main extends Application {
 				}
 			});
 			
+			// Infinite loop for "running" animation
 
 		} catch(Exception e) {
 			e.printStackTrace();		

@@ -340,6 +340,7 @@ public abstract class Critter {
 			}
 	}
 	
+	public static boolean running = false;
 	private static Stage world = new Stage();
 	public static void displayWorld() {
 		// Add adjustable size columns and rows according to world parameters
