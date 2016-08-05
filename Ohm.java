@@ -50,6 +50,13 @@ public class Ohm extends Critter {
 			walk(dir);
 		}
 		
+		if(look(dir)!=null){
+			walk(dir);
+		}
+		else{
+			run(dir);
+		}
+		
 		if (getEnergy() > 200) {
 			Ohm child = new Ohm();
 			for (int k = 0; k < 8; k += 1) {

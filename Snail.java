@@ -45,7 +45,14 @@ public class Snail extends Critter {
 	@Override
 	public void doTimeStep() {
 		/* take one step forward */
-		walk(dir);
+		if(look(dir)!=null){
+			dir+=4;
+			dir = dir%8;
+			run(dir);
+		}
+		else{
+			walk(dir);
+		}
 		
 		if (getEnergy() > (Params.min_reproduce_energy/2)) {
 			Snail child = new Snail();

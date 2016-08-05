@@ -41,8 +41,14 @@ public class BoxMan extends Critter {
 	@Override
 	public void doTimeStep() {
 		/* take one step forward */
-		walk(dir);
-		
+		if(look(dir).equals(null)){
+			walk(dir);
+		}
+		else{
+			if(turn)
+				dir = (dir + 2) % 8;
+			turn = !turn;
+		}
 		if (getEnergy() > 50) {
 			BoxMan child = new BoxMan();
 			for (int k = 0; k < 8; k += 1) {

@@ -38,7 +38,14 @@ public class Worm extends Critter {
 	@Override
 	public void doTimeStep() {
 		/* take one run() forward */
-		run(dir);
+		if(look(dir)!=null && look2(dir)!=null){
+			run(dir);
+		}
+		else{
+			dir+=4;
+			dir=dir%8;
+			walk(dir);
+		}
 		
 		if (getEnergy() > (Params.min_reproduce_energy*2)) {
 			Worm child = new Worm();

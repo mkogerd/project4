@@ -73,6 +73,7 @@ public abstract class Critter {
 	
 	protected String look(int direction) {
 		// Find coordinates to look at
+		this.energy = this.energy - Params.look_energy_cost;
 		int xLook = this.x_coord;
 		int yLook = this.y_coord;
 		if (direction == 7 || direction == 0 || direction == 1)
@@ -87,6 +88,31 @@ public abstract class Critter {
 		for (Critter b: population)
 			if (xLook == b.x_coord && yLook == b.y_coord)	// See if an element is at specified look location
 				return b.toString();
+		
+		return null;
+	}
+	
+	protected String look2(int direction){				//look2 method for critters to look two grids in their direction
+		this.energy = this.energy - Params.look_energy_cost;
+		int xLook = this.x_coord;
+		int yLook = this.y_coord;
+		if (direction == 7 || direction == 0 || direction == 1){
+			xLook +=2;
+		}
+		if (direction == 3 || direction == 4 || direction == 5){
+			xLook -=2;
+		}
+		if (direction == 5 || direction == 6 || direction == 7){
+			yLook +=2;
+		}
+		if (direction == 1 || direction == 2 || direction == 3){
+			yLook -=2;
+		}
+		
+		for (Critter b:population){
+			if(xLook == b.x_coord && yLook == b.y_coord)
+				return b.toString();
+		}
 		
 		return null;
 	}
