@@ -20,13 +20,13 @@ public class AlgaephobicCritter extends Critter {
 	public void doTimeStep() {
 		/* Move to somewhere without algae */
 		for (int dir = 0; dir < 8; dir++) {
-			if(this.look(dir, false) == null) {
+			if(this.look(dir) == null) {
 				walk(dir);
 				return;
 			}
 		}			
 		for (int dir = 0; dir < 8; dir++) {
-			if(this.look(dir, true) == null) {
+			if(this.look(dir) == null) {
 				run(dir);
 				return;
 			}
