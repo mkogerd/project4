@@ -36,28 +36,29 @@
                   <Label text="Make" GridPane.rowIndex="3" />
                   <Label text="Stats" GridPane.rowIndex="4" />
                   <Label text="Seed" GridPane.rowIndex="5" />
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" text="Add Critter" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#addCritters" text="Add Critter" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Button mnemonicParsing="false" text="View Stats" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <Button mnemonicParsing="false" onAction="#onSet_SeedClick" text="Set Seed" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <Label text="Speed" GridPane.rowIndex="1" />
-                  <Slider showTickLabels="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="speedField" blockIncrement="2.0" majorTickUnit="2.0" max="9.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <VBox prefHeight="43.0" prefWidth="154.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <ChoiceBox prefHeight="27.0" prefWidth="218.0" />
-                        <TextField />
+                        <TextField fx:id="makeField" />
                      </children>
                   </VBox>
                   <HBox prefHeight="29.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Run" />
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="101.0" text="Stop" />
+                        <Button mnemonicParsing="false" onAction="#startRunning" prefHeight="27.0" prefWidth="81.0" text="Run" />
+                        <Button mnemonicParsing="false" onAction="#stopRunning" prefHeight="27.0" prefWidth="101.0" text="Stop" />
                      </children>
                   </HBox>
                   <Label text="Step" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="tf_seed" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="stepField" promptText="# steps" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="seedField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Button mnemonicParsing="false" onAction="#onQuitClick" prefHeight="27.0" prefWidth="151.0" text="Quit" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                   <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#takeSteps" text="Take Steps" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children></AnchorPane>

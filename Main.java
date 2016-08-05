@@ -58,6 +58,13 @@ public class Main extends Application {
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+		
+		// =============== Animation ===============
+		new AnimationTimer() {
+            @Override public void handle(long currentNanoTime) {
+                Controller.run();
+            }
+        }.start();
 	}
 
 	/*	OLD STUFF
