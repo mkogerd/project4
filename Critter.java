@@ -71,7 +71,7 @@ public abstract class Critter {
 	
 	public abstract CritterShape viewShape(); 
 	
-	protected String look(int direction, boolean steps) {
+	protected String look(int direction) {
 		// Find coordinates to look at
 		int xLook = this.x_coord;
 		int yLook = this.y_coord;
