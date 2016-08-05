@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	private boolean running = false;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -136,7 +137,7 @@ public class Main extends Application {
 			new AnimationTimer() {
 	            @Override public void handle(long currentNanoTime) {
 	                try {
-	                	if ( Critter.running ) {
+	                	if ( running ) {
 	                		Critter.worldTimeStep();
 	                		Critter.displayWorld();
 	                		Thread.sleep(100);
@@ -152,7 +153,7 @@ public class Main extends Application {
 			runBtn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					Critter.running = true;
+					running = true;
 				}			
 			});
 			
@@ -160,7 +161,7 @@ public class Main extends Application {
 			stopBtn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					Critter.running = false;
+					running = false;
 				}			
 			});
 			
