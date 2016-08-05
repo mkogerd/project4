@@ -85,6 +85,16 @@ public abstract class Critter {
 		if (direction == 1 || direction == 2 || direction == 3)
 			yLook --;
 		
+		// Wrap-around correction
+		if (x_coord < 0)
+			x_coord += Params.world_width;
+		if (x_coord >= Params.world_width)
+			x_coord = Params.world_width % x_coord;
+		if (y_coord < 0)
+			y_coord += Params.world_height;
+		if (y_coord >= Params.world_height)
+			y_coord = Params.world_height % y_coord;
+		
 		for (Critter b: population)
 			if (xLook == b.x_coord && yLook == b.y_coord)	// See if an element is at specified look location
 				return b.toString();
@@ -108,6 +118,15 @@ public abstract class Critter {
 		if (direction == 1 || direction == 2 || direction == 3){
 			yLook -=2;
 		}
+		// Wrap-around correction
+		if (x_coord < 0)
+			x_coord += Params.world_width;
+		if (x_coord >= Params.world_width)
+			x_coord = Params.world_width % x_coord;
+		if (y_coord < 0)
+			y_coord += Params.world_height;
+		if (y_coord >= Params.world_height)
+			y_coord = Params.world_height % y_coord;
 		
 		for (Critter b:population){
 			if(xLook == b.x_coord && yLook == b.y_coord)

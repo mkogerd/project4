@@ -40,7 +40,7 @@
                   <Button mnemonicParsing="false" onAction="#stats" text="View Stats" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <Button mnemonicParsing="false" onAction="#onSet_SeedClick" text="Set Seed" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <Label text="Speed" GridPane.rowIndex="1" />
-                  <Slider fx:id="speedField" blockIncrement="2.0" majorTickUnit="2.0" max="9.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="speedField" blockIncrement="20.0" majorTickUnit="20.0" minorTickCount="1" onMouseClicked="#changeSpeed" showTickLabels="true" showTickMarks="true" value="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <VBox prefHeight="43.0" prefWidth="154.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <ChoiceBox fx:id="makeChoiceBox" prefHeight="27.0" prefWidth="218.0" />

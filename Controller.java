@@ -11,18 +11,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class Controller {
 	
 	private static boolean running;
+	private static int speed;
 	public static void run() {
 		try {
         	if ( running ) {
-        		Critter.worldTimeStep();
+        		// do timesteps according to speedfield every second
+        		for (int i = 0; i < speed; i+=1)
+        			Critter.worldTimeStep();
         		Critter.displayWorld();
-        		Thread.sleep(1000); // Sleep for 1 second divided by speed slider value
-        		//System.out.println("speedField: " + speedField.getValue());
-        		//System.out.println("speedField: " + 1000/speedField.getValue());
+        		Thread.sleep(1000); ;
         	}
         } catch (InterruptedException e) {
             // Do nothing
@@ -37,6 +39,7 @@ public class Controller {
 		makeChoiceBox.setItems(critterList);
 		statsChoiceBox.setValue("Craig");
 		statsChoiceBox.setItems(critterList);
+		speed = (int)speedField.getValue();
 	}
 	
 	// List of possible Critter names
@@ -50,7 +53,7 @@ public class Controller {
 	private ChoiceBox statsChoiceBox;
 
 	@FXML
-    private static Slider speedField; // Not working yet
+    private Slider speedField; // Not working yet
 	
     @FXML
     private TextField stepField;
@@ -69,6 +72,13 @@ public class Controller {
     @FXML
     void stopRunning(ActionEvent event) {
     	running = false;
+    }
+    
+    @FXML
+    void changeSpeed(MouseEvent event) {
+    	double var = speedField.getValue();
+    	System.out.println("Slid to: " + var);
+    	speed = (int)speedField.getValue();			// set the speed
     }
     
     @FXML
