@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Controller" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <GridPane alignment="CENTER" layoutX="63.0" layoutY="22.0" prefHeight="290.0" prefWidth="482.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="155.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="160.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.0" minWidth="10.0" prefWidth="167.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="71.0" minHeight="5.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <CheckComboBox prefHeight="27.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Make" GridPane.rowIndex="3" />
+                  <Label text="Stats" GridPane.rowIndex="4" />
+                  <Label text="Seed" GridPane.rowIndex="5" />
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" text="Add Critter" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" text="View Stats" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" text="Set Seed" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label text="Speed" GridPane.rowIndex="1" />
+                  <Slider showTickLabels="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <VBox prefHeight="43.0" prefWidth="154.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <ChoiceBox prefHeight="27.0" prefWidth="218.0" />
+                        <TextField />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="29.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Run" />
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="101.0" text="Stop" />
+                     </children>
+                  </HBox>
+                  <Label text="Step" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="151.0" text="Quit" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+         </children></AnchorPane>
+  </content>
+</TitledPane>
