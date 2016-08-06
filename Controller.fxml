@@ -28,16 +28,14 @@
                 <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="71.0" minHeight="5.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="71.0" minHeight="5.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Make" GridPane.rowIndex="3" />
                   <Label text="Stats" GridPane.rowIndex="4" />
                   <Label text="Seed" GridPane.rowIndex="5" />
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#addCritters" text="Add Critter" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onAction="#stats" text="View Stats" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <Button mnemonicParsing="false" onAction="#onSet_SeedClick" text="Set Seed" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <Label text="Speed" GridPane.rowIndex="1" />
                   <Slider fx:id="speedField" blockIncrement="20.0" majorTickUnit="20.0" minorTickCount="1" onMouseClicked="#changeSpeed" showTickLabels="true" showTickMarks="true" value="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -59,6 +57,13 @@
                   <Button mnemonicParsing="false" onAction="#onQuitClick" prefHeight="27.0" prefWidth="151.0" text="Quit" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                   <ChoiceBox fx:id="statsChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Button mnemonicParsing="false" onAction="#takeSteps" text="Take Steps" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#addCritters" text="Add Critter" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <HBox prefHeight="30.0" prefWidth="181.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#addStats" prefHeight="27.0" prefWidth="85.0" text="Add" />
+                        <Button mnemonicParsing="false" onAction="#removeStats" prefHeight="27.0" prefWidth="85.0" text="Remove" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children></AnchorPane>
