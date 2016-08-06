@@ -99,6 +99,24 @@ public class Snail extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * snails.size()) + "% left   ");
 		System.out.println();
 	}
+	
+	public static String runStats2(java.util.List<Critter> snails) {
+		int total_straight = 0;
+		int total_left = 0;
+		int total_right = 0;
+		int total_back = 0;
+		for (Object obj : snails) {
+			Snail s = (Snail) obj;
+			total_straight += s.genes[0];
+			total_right += s.genes[1] + s.genes[2] + s.genes[3];
+			total_back += s.genes[4];
+			total_left += s.genes[5] + s.genes[6] + s.genes[7];
+		}
+		
+		String ret = ("" + snails.size() + " total Snails    " + total_straight / (GENE_TOTAL * 0.01 * snails.size()) + "% straight   " + total_back / (GENE_TOTAL * 0.01 * snails.size()) + "% back   " + total_right / (GENE_TOTAL * 0.01 * snails.size()) + "% right   " + total_left / (GENE_TOTAL * 0.01 * snails.size()) + "% left   ");
+		return ret;
+	}
+	
 	public CritterShape viewShape() { return CritterShape.TRIANGLE; }
 	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.BLACK; }
 }

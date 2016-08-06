@@ -90,6 +90,22 @@ public class BoxMan extends Critter {
 		System.out.println();
 	}
 	
+	public static String runStats2(java.util.List<Critter> boxmans){
+		int total_straight = 0;
+		int total_left = 0;
+		int total_right = 0;
+		int total_back = 0;
+		for (Object obj : boxmans) {
+			BoxMan c = (BoxMan) obj;
+			total_straight += c.genes[0];
+			total_right += c.genes[1] + c.genes[2] + c.genes[3];
+			total_back += c.genes[4];
+			total_left += c.genes[5] + c.genes[6] + c.genes[7];
+		}
+		String ret = ("" + boxmans.size() + " total BoxMans    " + total_straight / (GENE_TOTAL * 0.01 * boxmans.size()) + "% straight   " + total_back / (GENE_TOTAL * 0.01 * boxmans.size()) + "% back   " + total_right / (GENE_TOTAL * 0.01 * boxmans.size()) + "% right   " + total_left / (GENE_TOTAL * 0.01 * boxmans.size()) + "% left   ");
+		return ret;
+	}
+	
 	public CritterShape viewShape() { return CritterShape.SQUARE; }
 	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.BROWN; }
 }
