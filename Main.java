@@ -37,7 +37,7 @@ public class Main extends Application {
 		try {
             TitledPane page = (TitledPane) FXMLLoader.load(Main.class.getResource("Controller.fxml"));
             Scene scene = new Scene(page);  
-            primaryStage.setTitle("FXML is Simple");
+            primaryStage.setTitle("Controller");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception ex) {
