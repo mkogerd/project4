@@ -105,6 +105,23 @@ public class Ohm extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * ohms.size()) + "% left   ");
 		System.out.println();
 	}
+	
+	public static String runStats2(java.util.List<Critter> ohms){
+		int total_straight = 0;
+		int total_left = 0;
+		int total_right = 0;
+		int total_back = 0;
+		for (Object obj : ohms) {
+			Ohm c = (Ohm) obj;
+			total_straight += c.genes[0];
+			total_right += c.genes[1] + c.genes[2] + c.genes[3];
+			total_back += c.genes[4];
+			total_left += c.genes[5] + c.genes[6] + c.genes[7];
+		}
+		String ret = ("" + ohms.size() + " total Ohms    " + total_straight / (GENE_TOTAL * 0.01 * ohms.size()) + "% straight   " + total_back / (GENE_TOTAL * 0.01 * ohms.size()) + "% back   " + total_right / (GENE_TOTAL * 0.01 * ohms.size()) + "% right   " + total_left / (GENE_TOTAL * 0.01 * ohms.size()) + "% left   ");
+		return ret;
+	}
+	
 	public CritterShape viewShape() { return CritterShape.STAR; }
 	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.YELLOW; }
 	public javafx.scene.paint.Color viewOutlineColor() { return javafx.scene.paint.Color.BLACK; }

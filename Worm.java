@@ -94,6 +94,23 @@ public class Worm extends Critter {
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * worms.size()) + "% left   ");
 		System.out.println();
 	}
+	
+	public static String runStats2(java.util.List<Critter> worms) {
+		int total_straight = 0;
+		int total_left = 0;
+		int total_right = 0;
+		int total_back = 0;
+		for (Object obj : worms) {
+			Worm w = (Worm) obj;
+			total_straight += w.genes[0];
+			total_right += w.genes[1] + w.genes[2] + w.genes[3];
+			total_back += w.genes[4];
+			total_left += w.genes[5] + w.genes[6] + w.genes[7];
+		}
+		String ret = ("" + worms.size() + " total Worms    " + total_straight / (GENE_TOTAL * 0.01 * worms.size()) + "% straight   " + total_back / (GENE_TOTAL * 0.01 * worms.size()) + "% back   " + total_right / (GENE_TOTAL * 0.01 * worms.size()) + "% right   " + total_left / (GENE_TOTAL * 0.01 * worms.size()) + "% left   ");
+		return ret;
+	}
+	
 	public CritterShape viewShape() { return CritterShape.DIAMOND; }
 	public javafx.scene.paint.Color viewColor() { return javafx.scene.paint.Color.RED; }
 }
