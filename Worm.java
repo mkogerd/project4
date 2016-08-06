@@ -38,8 +38,9 @@ public class Worm extends Critter {
 	@Override
 	public void doTimeStep() {
 		/* take one run() forward */
-		if(look(dir)!=null && look2(dir)!=null){
-			run(dir);
+		
+		if(look(dir)==null || look(dir).equals("@")){
+			walk(dir);
 		}
 		else{
 			dir+=4;
