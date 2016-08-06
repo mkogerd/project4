@@ -51,7 +51,7 @@ public class Snail extends Critter {
 		else{
 			dir+=4;
 			dir = dir%8;
-			run(dir);
+			walk(dir);
 		}
 		
 		if (getEnergy() > (Params.min_reproduce_energy/2)) {
