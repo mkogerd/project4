@@ -18,17 +18,12 @@ public class Controller {
 	private static boolean running;
 	private static int speed;
 	public static void run() {
-		try {
-        	if ( running ) {
-        		// do timesteps according to speedfield every second
-        		for (int i = 0; i < speed; i+=1)
-        			Critter.worldTimeStep();
-        		Critter.displayWorld();
-        		Thread.sleep(1000); ;
-        	}
-        } catch (InterruptedException e) {
-            // Do nothing
-        }
+		if ( running ) {
+			// do timesteps according to speedfield every frame
+			for (int i = 0; i < speed; i+=1)
+				Critter.worldTimeStep();
+			Critter.displayWorld();
+		}
 	}
 	
 	// Set initial values
@@ -116,7 +111,7 @@ public class Controller {
     }
     
     @FXML
-    void stats() {
+    void stats(ActionEvent event) {
     List<Critter> list = null;
 		
 		// Get specified critter list
