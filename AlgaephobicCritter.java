@@ -1,7 +1,5 @@
 package project4;
 
-//import project5.Critter.CritterShape;
-
 public class AlgaephobicCritter extends Critter {
 
 	@Override
